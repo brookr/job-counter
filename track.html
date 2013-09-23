@@ -1,0 +1,31 @@
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script>
+    var source, count, django, ios, js
+    var fetchJob = function(job) {
+      $.getJSON('http://anyorigin.com/get?url=http%3A//www.simplyhired.com/a/jobs/list/q-"' + job + '"/l-seattle&callback=?',
+        function(data){
+          source = $(data.contents)
+          count = source.find("span.search_title").text().split(" ")[4]
+          $("#" + job.replace(/(\+|\.)/g, "") + " .jobs").text(count)
+        }
+      )
+    }
+
+    jobs = ['django', 'ios', 'javascript', 'ruby+on+rails', '.NET', 'java', 'clojure']
+
+    jobs.forEach(fetchJob)
+
+  </script>
+</head>
+<body>
+<div id="rubyonrails">Rails: <span class="jobs"></span></div>
+<div id="ios">iOS: <span class="jobs"></span></div>
+<div id="django">Django: <span class="jobs"></span></div>
+<div id="javascript">JavaScript: <span class="jobs"></span></div>
+<div id="clojure">Clojure: <span class="jobs"></span></div>
+<div id="java">Java: <span class="jobs"></span></div>
+<div id="net">.NET: <span class="jobs"></span></div>
+</body>
+</html>
